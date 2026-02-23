@@ -1,3 +1,5 @@
+creation of repo local and github:-
+
 1)First we create a remote repo on github 
 2)we create a local repo and initialize the local by git init and link the local with remote using this command - git remote add origin https://github.com/your-username/ai-workflow-backend.git
 3)Then we make changes and commit changes stage files and push. 
@@ -5,3 +7,60 @@ git add . ----> commit
 git commit -m "Initial commit: project setup" ---->commit msg
 git push -u origin main ----->push to remote from local
 
+
+installations and concepts:-
+
+pip install fastapi uvicorn sqlalchemy psycopg2-binary pydantic
+1)fastapi the api framework we will use for the project
+2)uvicorn is the server use to run locally
+3)sqlalchemy- library for working with databases (PostgreSQL in our case).Lets you define models (tables) in Python and interact with the DB using Python code, without writing raw SQL every time.
+4)psycopg2-binary -This is the driver that lets Python talk to PostgreSQL.
+SQLAlchemy uses this under the hood to actually send commands to PostgreSQL.
+5)pydantic---Pydantic helps validate data — ensures user input or API data has the right type (string, int, etc.) before saving it to the DB.
+Flow Example (Layman Terms)
+
+User sends POST /users with JSON:
+{ "name": "Alice", "email": "alice@example.com" }
+
+Pydantic checks: name is string, email is string, required fields exist
+SQLAlchemy converts it into a User row
+psycopg2 executes INSERT INTO users ... in PostgreSQL
+PostgreSQL stores data → result sent back
+SQLAlchemy + Pydantic convert result into JSON → FastAPI returns it
++----------------+
+|   FastAPI App  |
+|  (main.py)     |
+| Receives HTTP  |
+| requests       |
++-------+--------+
+        |
+        v
++----------------+
+|   Pydantic     |
+|  (Models /     |
+|   Validation)  |
+| Validate input |
+| and output     |
++-------+--------+
+        |
+        v
++----------------+
+|   SQLAlchemy   |
+|   ORM Layer    |
+| Python objects |
+| → SQL queries  |
++-------+--------+
+        |
+        v
++----------------+
+| psycopg2 Driver|
+| Sends SQL to   |
+| PostgreSQL     |
++-------+--------+
+        |
+        v
++----------------+
+| PostgreSQL DB  |
+| Stores Users,  |
+| Workflows, etc |
++----------------+
