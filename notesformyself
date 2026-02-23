@@ -1,2 +1,7 @@
 1)First we create a remote repo on github 
-2)we create a local repo and link the local with remote using this command- 
+2)we create a local repo and initialize the local by git init and link the local with remote using this command - git remote add origin https://github.com/your-username/ai-workflow-backend.git
+3)Then we make changes and commit changes stage files and push. 
+git add . ----> commit
+git commit -m "Initial commit: project setup" ---->commit msg
+git push -u origin main ----->push to remote from local
+
